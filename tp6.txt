@@ -1,0 +1,26 @@
+		TP6
+			1./ git clone http://gitub.com/yyekhlef/blue-green
+				cd blue-green
+
+			2./ docker run -d --name haproxy --net host -v ${PWD}:/usr/local/etc/haproxy emilevauge/haproxy-reloadable
+
+			3./ git clone https://github.com/vdemeester/miniws
+				cd miniws
+
+			4./ git	checkout -t origin/v1
+
+			5./ docker build -t miniws:v1 .
+
+			6./ docker run -p 4001:8080 miniws:v1
+				docker run -p 4002:8080 miniws:v1
+
+			7./ git checkout -t origin/v2
+				docker build -t miniws:v2 .
+
+				docker run -p 5001:8080 miniws:v2
+				docker run -p 5002:8080 miniws:v2
+
+			8./ Mettre à jour le fichier de config haproxy.cfg
+				Faire pointer sur les ports 500x au lieu de 400x
+
+
